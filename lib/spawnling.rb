@@ -4,11 +4,13 @@ class Spawnling
   if defined? ::Rails
     RAILS_1_x = (::Rails::VERSION::MAJOR == 1) unless defined?(RAILS_1_x)
     RAILS_2_2 = ((::Rails::VERSION::MAJOR == 2 && ::Rails::VERSION::MINOR >= 2)) unless defined?(RAILS_2_2)
-    RAILS_3_x = (::Rails::VERSION::MAJOR > 2) unless defined?(RAILS_3_x)
+    RAILS_3_x = (::Rails::VERSION::MAJOR == 3) unless defined?(RAILS_3_x)
+    RAILS_5_1 = ((::Rails::VERSION::MAJOR == 5 && ::Rails::VERSION::MINOR >= 1)) unless defined?(RAILS_5_1)
   else
     RAILS_1_x = nil
     RAILS_2_2 = nil
     RAILS_3_x = nil
+    RAILS_5_1 = nil
   end
 
   @@default_options = {
@@ -182,7 +184,6 @@ class Spawnling
 
         # run the block of code that takes so long
         yield
-
       rescue => ex
         @@logger.error "spawn> Exception in child[#{Process.pid}] - #{ex.class}: #{ex.message}" if @@logger
         @@logger.error "spawn> " + ex.backtrace.join("\n") if @@logger

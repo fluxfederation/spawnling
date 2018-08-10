@@ -15,6 +15,14 @@ if defined?(ActiveRecord)
 
         establish_connection
       end
+    elsif ::Spawnling::RAILS_5_1
+      def self.spawn_reconnect(klass=self)
+        ActiveRecord::Base.connection.tap do |c|
+          c.clear_cache!
+          c.reset_transaction
+          c.send(:connect)
+        end
+      end
     else
       def self.spawn_reconnect(klass=self)
         spec = @@defined_connections[klass.name]
