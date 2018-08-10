@@ -189,7 +189,7 @@ class Spawnling
       ensure
         begin
           # to be safe, catch errors on closing the connnections too
-          ActiveRecord::Base.connection_handler.clear_all_connections! if defined?(ActiveRecord)
+          # ActiveRecord::Base.connection_handler.clear_all_connections! if defined?(ActiveRecord)
         ensure
           @@logger.info "spawn> child[#{Process.pid}] took #{Time.now - start} sec" if @@logger
           # ensure log is flushed since we are using exit!
