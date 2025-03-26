@@ -4,3 +4,5 @@
 foo
 coverage
 Gemfile.lock
+.DS_Store
+spec/.DS_Store
